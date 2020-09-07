@@ -1,11 +1,14 @@
 package set1;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.safari.SafariDriver.WindowType;
 
 public class Google {
 	public static void lucky(WebDriver c)
@@ -39,19 +42,49 @@ System.out.println(c.findElement(By.id("latest-title")).getText());
 		System.out.println(trend.getText());
 		}
 	}
+	
+	public static void google_search_nav_sublink(WebDriver c) throws InterruptedException {
+		//this locator is for the entire search box and it works only for click operation
+		//c.findElement(By.cssSelector(".RNNXgb")).sendKeys("history");
+		c.findElement(By.cssSelector(".gLFyf.gsfi")).sendKeys("history");
+		//c.findElement(By.cssSelector(".RNNXgb")).sendKeys(Keys.ENTER);
+		c.findElement(By.cssSelector(".gLFyf.gsfi")).sendKeys(Keys.ENTER);
+		//.TbwUpd.NJjxre - locator for all links in the page
+	//List<WebElement> links=c.findElements(By.cssSelector(".TbwUpd.NJjxre"));
+		List<WebElement> links=c.findElements(By.cssSelector(".TbwUpd.NJjxre  cite:nth-child(1)"));
+		Thread.sleep(3000);
+		c.findElement(By.cssSelector("div.r")).click();
+	for(WebElement link:links)
+	{
+		System.out.println(link.getText());
+		if(link.getText().equals("www.history.com"))
+		{	
+			//link.click();
+			//System.out.println(c.findElement(By.cssSelector(link+" cite:nth-child(1)")));
+			System.out.println(link);
+			link.sendKeys(Keys.chord(Keys.CONTROL,Keys.ENTER));
+		break;
+		}
+	}
+		
+	}
 
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
 
 		System.setProperty("webdriver.chrome.driver", "C:\\DEV\\chromedriver.exe");
 		WebDriver c=new ChromeDriver();
+		c.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		c.get("https://www.google.co.in");
+		//c.findElement(By.linkText("Gmail")).sendKeys(Keys.chord(Keys.CONTROL,Keys.ENTER));
 		//if declared static
-		lucky(c);
+		//lucky(c);
 		//google_searchbox_click_list(c);
 		//if method is not declared static
 		//Google g=new Google();
 		//g.lucky(c);
+		//get links of searche results
+		google_search_nav_sublink(c);
 			
 		
 	}
