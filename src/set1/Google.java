@@ -51,18 +51,22 @@ System.out.println(c.findElement(By.id("latest-title")).getText());
 		c.findElement(By.cssSelector(".gLFyf.gsfi")).sendKeys(Keys.ENTER);
 		//.TbwUpd.NJjxre - locator for all links in the page
 	//List<WebElement> links=c.findElements(By.cssSelector(".TbwUpd.NJjxre"));
-		List<WebElement> links=c.findElements(By.cssSelector(".TbwUpd.NJjxre  cite:nth-child(1)"));
+		//List<WebElement> links=c.findElements(By.cssSelector(".TbwUpd.NJjxre  cite:nth-child(1)"));
+		List<WebElement> links=c.findElements(By.xpath("//*[@class='LC20lb DKV0Md']/parent::a"));
 		Thread.sleep(3000);
-		c.findElement(By.cssSelector("div.r")).click();
+		//c.findElement(By.cssSelector("div.r")).click();
 	for(WebElement link:links)
 	{
 		System.out.println(link.getText());
-		if(link.getText().equals("www.history.com"))
+		//if(link.getText().contains("www.history.com"))
+		if(link.getText().contains("History is alive"))
 		{	
 			//link.click();
 			//System.out.println(c.findElement(By.cssSelector(link+" cite:nth-child(1)")));
 			System.out.println(link);
-			link.sendKeys(Keys.chord(Keys.CONTROL,Keys.ENTER));
+			String ops=Keys.chord(Keys.CONTROL,Keys.RETURN);
+			//link.sendKeys(Keys.chord(Keys.CONTROL,Keys.ENTER));
+			link.sendKeys(ops);
 		break;
 		}
 	}
@@ -76,6 +80,10 @@ System.out.println(c.findElement(By.id("latest-title")).getText());
 		WebDriver c=new ChromeDriver();
 		c.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		c.get("https://www.google.co.in");
+		//c.findElement(By.cssSelector(".gLFyf.gsfi")).sendKeys("history");
+		//c.findElement(By.cssSelector(".gLFyf.gsfi")).sendKeys(Keys.ENTER);
+		//c.findElement(By.xpath("//*[@class='LC20lb DKV0Md']/parent::a")).click();
+		//c.findElement(By.xpath("//*[@class='LC20lb DKV0Md']/parent::a")).sendKeys(Keys.chord(Keys.CONTROL,Keys.ENTER));
 		//c.findElement(By.linkText("Gmail")).sendKeys(Keys.chord(Keys.CONTROL,Keys.ENTER));
 		//if declared static
 		//lucky(c);
